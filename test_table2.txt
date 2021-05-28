@@ -1,0 +1,12 @@
+CREATE TABLE test_table2 (
+  id int(10) unsigned auto_increment NOT NULL,
+  file text NOT NULL,
+  PRIMARY KEY  (id)
+) ENGINE=MyISAM;
+
+--
+-- Dumping data for table 'test_table2'
+--
+
+INSERT INTO test_table2 VALUES (1,'img/test.gif');
+

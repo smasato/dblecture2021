@@ -1,0 +1,34 @@
+<html>
+<head><title>追加フォーム</title></head>
+<body>
+図書データを追加します。
+<form action="library_add.php" method="post">
+<table border="1">
+<tr>
+<td>ISBN番号</td>
+<td><input type="text" name="isbn"></td>
+</tr>
+<tr>
+<td>題名</td>
+<td><input type="text" name="title"></td>
+</tr>
+<tr>
+<td>著者</td>
+<td><input type="text" name="auth"></td>
+</tr>
+<tr>
+<td>出版社</td>
+<td><input type="text" name="pub"></td>
+</tr>
+<tr>
+<td>出版年</td>
+<td><input type="text" name="pubyear"></td>
+</tr>
+<tr>
+<td colspan="2" align="center">
+<input type="submit" name="submit" value="追加"></td>
+</tr>
+</table>
+</form>
+</body>
+</html>
