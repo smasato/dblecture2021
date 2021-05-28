@@ -1,5 +1,5 @@
 <?php
-$table_name = "application_user"
+$table_name = "score"
 ?>
 <html>
 
@@ -10,7 +10,7 @@ $table_name = "application_user"
 <body>
     <table border="1">
         <tr>
-            <td>id</td>
+            <td>isbn</td>
             <td>name</td>
         </tr>
         <?php
@@ -23,7 +23,7 @@ $table_name = "application_user"
         $res = mysqli_query($conn, $sql);
         while ($row = mysqli_fetch_array($res)) {
             print("<tr>");
-            print("<td>" . $row["id"] . "</td>");
+            print("<td>" . $row["isbn"] . "</td>");
             print("<td>" . $row["name"] . "</td>");
             print("</tr>\n");
         }

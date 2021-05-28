@@ -1,5 +1,5 @@
 <?php
-$table_name = "application_user"
+$table_name = "music"
 ?>
 <html>
 
@@ -11,6 +11,7 @@ $table_name = "application_user"
     <table border="1">
         <tr>
             <td>id</td>
+            <td>isbn</td>
             <td>name</td>
         </tr>
         <?php
@@ -24,6 +25,7 @@ $table_name = "application_user"
         while ($row = mysqli_fetch_array($res)) {
             print("<tr>");
             print("<td>" . $row["id"] . "</td>");
+            print("<td>" . $row["isbn"] . "</td>");
             print("<td>" . $row["name"] . "</td>");
             print("</tr>\n");
         }
@@ -32,4 +34,4 @@ $table_name = "application_user"
     </table>
 </body>
 
-</html>
+</html
