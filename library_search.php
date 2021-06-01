@@ -27,6 +27,16 @@ if(isset($_POST["auth"]) && ($_POST["auth"] != "")){
     }
 }
 
+if(isset($_POST["bpubyear"]) && ($_POST["bpubyear"] != "")){
+    $bpubyear = mysqli_escape_string($conn, $_POST["bpubyear"]);
+    $bpubyear = str_replace("%", "\%", $bpubyear);
+    if ($condition == ""){
+        $condition = "WHERE bpubyear >= ".$bpubyear;
+    } else{
+        $condition .= "AND bpubyear >= ".$bpubyear;
+    }
+}
+
 $sql = "SELECT * FROM book_table ".$condition." ORDER BY bid LIMIT 10";
 $res = mysqli_query($conn, $sql);
 
@@ -39,7 +49,7 @@ while($row = mysqli_fetch_array($res)) {
     print("<td>".$row["bauth"]."</td>");
     print("<td>".$row["bpub"]."</td>");
     print("<td>".$row["bpubyear"]."</td>");
-    print("<td><a href= \"update_form.php?bid=".$row["bid"]."\">更新</a></td>");
+    print("<td><a href= \"query2.php?bid=".$row["bid"]."\">更新</a></td>");
     print("<td><a href= \"library_delete.php?bid=".$row["bid"]."\">削除</a></td>");
     print("</tr>");
 }
