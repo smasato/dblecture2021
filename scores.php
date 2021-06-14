@@ -1,3 +1,5 @@
+<?php require("util.php"); ?>
+
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -6,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
-  <title>楽譜一覧 | ピアノ練習記録システム</title>
+  <?php title("楽譜一覧") ?>
 </head>
 
 <body>

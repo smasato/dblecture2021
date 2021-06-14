@@ -1,4 +1,6 @@
 <?php
+require("util.php");
+
 $host = "localhost";
 if (!$conn = mysqli_connect($host, "s1711452", "hogehoge")) {
   die("データベース接続エラー.<br />");
@@ -26,7 +28,7 @@ if (isset($_GET['isbn']) && $_GET['isbn'] != "") {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
-  <title><?php echo ($score_name); ?> 曲一覧 | ピアノ練習記録システム</title>
+  <?php title("$score_name 曲一覧"); ?>
 </head>
 
 <body>
