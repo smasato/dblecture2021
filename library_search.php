@@ -49,7 +49,7 @@ while($row = mysqli_fetch_array($res)) {
     print("<td>".$row["bauth"]."</td>");
     print("<td>".$row["bpub"]."</td>");
     print("<td>".$row["bpubyear"]."</td>");
-    print("<td><a href= \"query2.php?bid=".$row["bid"]."\">更新</a></td>");
+    print("<td><a href= \"update_form.php?bid=".$row["bid"]."\">更新</a></td>");
     print("<td><a href= \"library_delete.php?bid=".$row["bid"]."\">削除</a></td>");
     print("</tr>");
 }

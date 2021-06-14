@@ -6,11 +6,11 @@
 
 
 $host = "localhost";
-if (!$conn = mysqli_connect($host, "dblecture", "hogehoge")){
+if (!$conn = mysqli_connect($host, "s1711452", "hogehoge")){
     die("データベース接続エラー.<br />");
 }
 
-mysqli_select_db($conn, "dblecture");
+mysqli_select_db($conn, "s1711452");
 mysqli_set_charset($conn, "utf8");
 
 
