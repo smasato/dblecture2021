@@ -1,5 +1,5 @@
 <?php
-require("system/util.php");
+require "system/util.php";
 $user = NULL; ?>
 
 <!DOCTYPE html>
@@ -38,7 +38,7 @@ $user = NULL; ?>
     </div>
   </div>
 </section>
-<?php include("templates/footer.php"); ?>
+<?php include "templates/footer.php"; ?>
 </body>
 
 </html>

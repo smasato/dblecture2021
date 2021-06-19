@@ -3,6 +3,7 @@ require("system/util.php");
 require("system/application_user.php");
 $user = current_user();
 
+# TODO: 関数化する
 $host = "localhost";
 if (!$conn = mysqli_connect($host, "s1711452", "hogehoge")) {
   die("データベース接続エラー.<br />");
@@ -16,7 +17,7 @@ if (isset($_GET['isbn']) && $_GET['isbn'] != "") {
 
   $sql = "SELECT score.name, music.id, music.name FROM score, music where music.isbn=" . $isbn . " AND score.isbn=" . $isbn;
   $res = mysqli_query($conn, $sql);
-  $rows = mysqli_fetch_all($res, MYSQLI_NUM);
+  $rows = mysqli_fetch_all($res);
   mysqli_free_result($res);
 
   $score_name = $rows[0][0];

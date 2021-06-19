@@ -26,6 +26,7 @@ $user = current_user();
         <td>楽譜名</td>
       </tr>
       <?php
+      # TODO: 関数化する
       $table_name = "score";
       $host = "localhost";
       if (!$conn = mysqli_connect($host, "s1711452", "hogehoge")) {

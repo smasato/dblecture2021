@@ -15,7 +15,7 @@ $user = NULl;
 </head>
 
 <body>
-<?php include("templates/header.php"); ?>
+<?php include "templates/header.php"; ?>
 <?php ?>
 <section class="section">
   <div class="container">
@@ -28,7 +28,7 @@ $user = NULl;
     </div>
   </div>
 </section>
-<?php include("templates/footer.php"); ?>
+<?php include "templates/footer.php"; ?>
 </body>
 
 </html>

@@ -43,7 +43,7 @@ function get_user_by_username($user_name)
   $stmt->bind_param("s", $user_name);
   $stmt->execute();
 
-  return $stmt->get_result()->fetch_all();
+  return $stmt->get_result()->fetch_all(); # TODO: 1ユーザーだけを返す
 }
 
 function get_user_by_id($user_id)

@@ -23,19 +23,19 @@ $user = NULL;
       <div class="column is-one-third">
         <h1 class="title">利用者登録</h1>
         <?php
-        if (user_exits_by_name($_POST["name"])) {
-          echo "<p class=\"has-text-danger\">同名のユーザーが存在します</p>";
-        } else {
+        if (user_exits_by_name($_POST["name"])): ?>
+          <p class="has-text-danger">同名のユーザーが存在します。</p>
+        <?php else:
           $res = user_register($_POST["name"])[0]; ?>
           <p>利用者登録が成功しました。</p>
           <p>利用者名: <?php echo $res[1]; ?></p>
           <p>利用者ID: <?php echo $res[0]; ?></p>
-        <?php } ?>
+        <?php endif; ?>
       </div>
     </div>
   </div>
 </section>
-<?php include("templates/footer.php"); ?>
+<?php include "templates/footer.php"; ?>
 </body>
 
 </html>

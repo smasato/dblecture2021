@@ -1,6 +1,6 @@
 <?php
-require "./system/util.php";
-require "./system/application_user.php";
+require "system/util.php";
+require "system/application_user.php";
 $user = current_user();
 ?>
 
@@ -47,7 +47,7 @@ $user = current_user();
     </div>
   </div>
 </section>
-<?php include("templates/footer.php"); ?>
+<?php include "templates/footer.php"; ?>
 </body>
 
 </html>
