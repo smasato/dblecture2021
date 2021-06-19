@@ -1,6 +1,8 @@
 <?php
-require("system/util.php");
-$user = NULL; ?>
+require "./system/util.php";
+require "./system/application_user.php";
+$user = current_user();
+?>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -10,7 +12,7 @@ $user = NULL; ?>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
-  <title><?php title("利用者登録") ?></title>
+  <title><?php title("ログイン") ?></title>
 </head>
 
 <body>
@@ -19,15 +21,22 @@ $user = NULL; ?>
   <div class="container">
     <div class="columns">
       <div class="column is-one-third">
-        <h1 class="title">利用者登録</h1>
-        <h2 class="subtitle">システムの利用者登録ができます。</h2>
-        <form action="register.php" method="post">
+        <h1 class="title">ログイン</h1>
+        <h2 class="subtitle">利用者を選択してください。</h2>
+        <form action="login.php" method="post">
           <div class="field">
             <label class="label">利用者名</label>
             <div class="control">
-              <label>
-                <input class="input" type="text" name="name">
-              </label>
+              <div class="select">
+                <label>
+                  <select name="id">
+                    <?php $users = get_users(); ?>
+                    <?php foreach ($users as $user) : ?>
+                      <option value="<?php echo($user[0]); ?>"><?php echo $user[1] ?></option>
+                    <?php endforeach; ?>
+                  </select>
+                </label>
+              </div>
             </div>
           </div>
           <div class="control">

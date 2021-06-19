@@ -1,5 +1,7 @@
 <?php
-require("util.php");
+require("system/util.php");
+require("system/application_user.php");
+$user = current_user();
 
 $host = "localhost";
 if (!$conn = mysqli_connect($host, "s1711452", "hogehoge")) {
@@ -28,11 +30,11 @@ if (isset($_GET['isbn']) && $_GET['isbn'] != "") {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
-  <?php title("$score_name 曲一覧"); ?>
+  <title><?php title("$score_name 曲一覧"); ?></title>
 </head>
 
 <body>
-  <?php include("header.php"); ?>
+  <?php include("templates/header.php"); ?>
   <section class="section">
     <div class="container">
       <h1 class="title"><?php echo ($score_name); ?> 曲一覧</h1>
@@ -53,7 +55,7 @@ if (isset($_GET['isbn']) && $_GET['isbn'] != "") {
       </table>
     </div>
   </section>
-  <?php include("footer.php"); ?>
+  <?php include("templates/footer.php"); ?>
 </body>
 
 </html>
