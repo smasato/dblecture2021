@@ -4,7 +4,7 @@ require "system/application_user.php";
 require "system/practice.php";
 $user = current_user();
 
-$practice = get_practice($user->id, $_GET['music_id']);
+$practice = get_practice($user, $_GET['music_id']);
 $music = $practice->music();
 $score = $practice->music()->score();
 ?>
@@ -26,6 +26,8 @@ $score = $practice->music()->score();
     <h1 class="title"><?php echo("$score->name $music->name"); ?></h1>
     <h2 class="subtitle"><?php echo("$score->name $music->name"); ?> の練習記録を編集します。</h2>
     <form action="practice_edit.php" method="post">
+      <input type="hidden" name="user_id" value="<?php echo $practice->user()->id ?>">
+      <input type="hidden" name="music_id" value="<?php echo $practice->music()->id ?>">
       <div class="field">
         <label class="label">難易度</label>
         <div class="control">
