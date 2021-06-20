@@ -32,9 +32,10 @@ $user = current_user();
             <td>状態</td>
             <td>練習開始日</td>
             <td>練習終了日</td>
+            <td>編集</td>
           </tr>
           <?php
-          $practices = get_practices_by_user_id($user->id);
+          $practices = get_practices_by_user($user);
           foreach ($practices as $practice): ?>
             <tr>
               <?php /** @var Practice $practice */ ?>
@@ -44,6 +45,9 @@ $user = current_user();
               <td><?php echo $practice->state ?></td>
               <td><?php echo $practice->start_date ?></td>
               <td><?php echo $practice->end_date ?></td>
+              <td>
+                <a href="http://turkey.slis.tsukuba.ac.jp/~s1711452/practice_edit_form.php?music_id=<?php echo $practice->music()->id ?>">編集</a>
+              </td>
             </tr>
           <?php endforeach;
           unset($practice); ?>
