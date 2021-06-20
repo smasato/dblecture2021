@@ -42,3 +42,20 @@ function get_musics_by_score_isbn(string $score_isbn): array
 
   return $musics;
 }
+
+function get_music_by_id(int $id)
+{
+  $mysqli = db_setup();
+
+  $stmt = $mysqli->prepare("select * from music where music.id=?");
+  $stmt->bind_param("i", $id);
+  $stmt->execute();
+
+  $row = $stmt->get_result()->fetch_all()[0];
+
+  if (is_null($row)) {
+    return null;
+  }
+
+  return new Music(...$row);
+}

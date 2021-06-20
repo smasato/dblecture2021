@@ -13,6 +13,7 @@
         <a href="http://turkey.slis.tsukuba.ac.jp/~s1711452/login_form.php" class="navbar-item">ログイン</a>
       <?php else: ?>
         <span class="navbar-item">ログイン中&nbsp;<b><?php echo $user->name; ?></b></span>
+        <a href="http://turkey.slis.tsukuba.ac.jp/~s1711452/practices.php" class="navbar-item">練習</a>
         <a href="http://turkey.slis.tsukuba.ac.jp/~s1711452/logout.php" class="navbar-item">ログアウト</a>
       <?php endif; ?>
 
