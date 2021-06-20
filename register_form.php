@@ -26,7 +26,7 @@ $user = null; ?>
             <label class="label">利用者名</label>
             <div class="control">
               <label>
-                <input class="input" type="text" name="name">
+                <input class="input" type="text" name="name" required>
               </label>
             </div>
           </div>

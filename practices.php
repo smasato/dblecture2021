@@ -24,6 +24,7 @@ $user = current_user();
       <div class="column">
         <h1 class="title">練習</h1>
         <h2 class="subtitle">練習の一覧です。</h2>
+        <p><a href="http://turkey.slis.tsukuba.ac.jp/~s1711452/practice_add_form.php">練習の追加</a></p>
         <table class="table is-striped is-fullwidth">
           <tr>
             <td>楽譜名</td>

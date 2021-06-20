@@ -124,7 +124,7 @@ function user_login(int $user_id)
 {
   $user = get_user_by_id($user_id);
   if (!is_null($user)) {
-    setcookie("user_id", (string)$user[0]);
+    setcookie("user_id", (string)$user->id);
   }
   return $user;
 }
@@ -147,7 +147,7 @@ function current_user()
   if (isset($_COOKIE["user_id"])) {
     $user_id = (int)$_COOKIE["user_id"];
     $user = get_user_by_id($user_id);
-
   }
+
   return $user;
 }

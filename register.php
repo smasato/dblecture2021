@@ -1,5 +1,5 @@
-<?php require "system/util.php"; ?>
-<?php require "system/application_user.php";
+<?php require_once "system/util.php"; ?>
+<?php require_once "system/application_user.php";
 $user = null;
 ?>
 
@@ -21,16 +21,23 @@ $user = null;
   <div class="container">
     <div class="columns">
       <div class="column is-one-third">
-        <h1 class="title">利用者登録</h1>
-        <?php
-        if (user_exits_by_name($_POST["name"])): ?>
-          <p class="has-text-danger">同名のユーザーが存在します。</p>
-        <?php else:
-          $res = user_register($_POST["name"])[0]; ?>
-          <p>利用者登録が成功しました。</p>
-          <p>利用者名: <?php echo $res[1]; ?></p>
-          <p>利用者ID: <?php echo $res[0]; ?></p>
-        <?php endif; ?>
+        <div class="content">
+          <h1 class="title">利用者登録</h1>
+          <?php
+          if (user_exits_by_name($_POST["name"])): ?>
+            <div class="block">
+              <p class="has-text-danger">同名のユーザーが存在します。</p>
+            </div>
+          <?php else:
+            $user = user_register($_POST["name"]); ?>
+            <div class="block">
+              <p class="has-text-success">利用者登録が成功しました。</p>
+              <p>利用者名: <?php echo $user->name; ?></p>
+              <p>利用者ID: <?php echo $user->id; ?></p>
+            </div>
+            <p><a href="http://turkey.slis.tsukuba.ac.jp/~s1711452/login_form.php">ログイン</a>ページでログインできます。</p>
+          <?php endif; ?>
+        </div>
       </div>
     </div>
   </div>
