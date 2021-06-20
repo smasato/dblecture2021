@@ -8,11 +8,11 @@
       <a href="http://turkey.slis.tsukuba.ac.jp/~s1711452/scores.php" class="navbar-item">楽譜</a>
     </div>
     <div class="navbar-end">
-      <?php if ($user == NULL): ?>
+      <?php if ($user == null): ?>
         <a href="http://turkey.slis.tsukuba.ac.jp/~s1711452/register_form.php" class="navbar-item">利用者登録</a>
         <a href="http://turkey.slis.tsukuba.ac.jp/~s1711452/login_form.php" class="navbar-item">ログイン</a>
       <?php else: ?>
-        <span class="navbar-item">ログイン中&nbsp;<b><?php echo $user[1]; ?></b></span>
+        <span class="navbar-item">ログイン中&nbsp;<b><?php echo $user->name; ?></b></span>
         <a href="http://turkey.slis.tsukuba.ac.jp/~s1711452/logout.php" class="navbar-item">ログアウト</a>
       <?php endif; ?>
 

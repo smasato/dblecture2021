@@ -1,6 +1,18 @@
 <?php
 require_once "system/db.php";
 
+class User
+{
+  public $id;
+  public $name;
+
+  function __construct($id, $name)
+  {
+    $this->id = $id;
+    $this->name = $name;
+  }
+}
+
 /**
  * ユーザーが存在するか
  * @param string $user_name
@@ -10,20 +22,20 @@ function user_exits_by_name(string $user_name = ""): bool
 {
   $mysqli = db_setup();
 
-  $stmt = $mysqli->prepare("SELECT * FROM application_user WHERE application_user.name=?");
+  $stmt = $mysqli->prepare("select * from application_user where application_user.name=?");
   $stmt->bind_param("s", $user_name);
   $stmt->execute();
 
   if ($stmt->get_result()->num_rows == 0) {
-    return FALSE;
+    return false;
   } else {
-    return TRUE;
+    return true;
   }
 }
 
 /**
  * @param string $user_name
- * @return array|null
+ * @return User|null
  */
 function user_register(string $user_name)
 {
@@ -35,44 +47,55 @@ function user_register(string $user_name)
     } else {
       $mysqli = db_setup();
 
-      $stmt = $mysqli->prepare("INSERT INTO application_user(name) VALUES(?)");
+      $stmt = $mysqli->prepare("insert into application_user(name) values(?)");
       $stmt->bind_param("s", $user_name);
       $stmt->execute();
 
-      return get_user_by_username($user_name);
+      return get_user_by_name($user_name);
     }
   }
 }
 
 /**
  * @param string $user_name
- * @return array
+ * @return User|null
  */
-function get_user_by_username(string $user_name): array
+function get_user_by_name(string $user_name)
 {
   $mysqli = db_setup();
 
-  $stmt = $mysqli->prepare("SELECT * FROM application_user WHERE application_user.name=?");
+  $stmt = $mysqli->prepare("select * from application_user where application_user.name=?");
   $stmt->bind_param("s", $user_name);
   $stmt->execute();
 
-  return $stmt->get_result()->fetch_all()[0];
+  $user_row = $stmt->get_result()->fetch_all()[0];
+  if (is_null($user_row)) {
+    return null;
+  }
+
+  return new User($user_row[0], $user_row[1]);
 }
 
 /**
  * user_idからuserを取得する
  * @param $user_id int
- * @return array | null ユーザーが存在する場合は array を返し、存在しない場合は null を返す。
+ * @return User | null ユーザーが存在する場合は User を返し、存在しない場合は null を返す。
  */
 function get_user_by_id(int $user_id)
 {
   $mysqli = db_setup();
 
-  $stmt = $mysqli->prepare("SELECT * FROM application_user WHERE application_user.id=?");
+  $stmt = $mysqli->prepare("select * from application_user where application_user.id=?");
   $stmt->bind_param("i", $user_id);
   $stmt->execute();
 
-  return $stmt->get_result()->fetch_all()[0];
+  $user_row = $stmt->get_result()->fetch_all()[0];
+
+  if (is_null($user_row)) {
+    return null;
+  }
+
+  return new User($user_row[0], $user_row[1]);
 }
 
 
@@ -83,14 +106,19 @@ function get_users(): array
 {
   $mysqli = db_setup();
 
-  $res = $mysqli->query("SELECT * FROM application_user");
+  $res = $mysqli->query("select * from application_user");
 
-  return $res->fetch_all();
+  $users = [];
+  foreach ($res->fetch_all() as $row) {
+    array_push($users, new User($row[0], $row[1]));
+  }
+
+  return $users;
 }
 
 /**
  * @param int $user_id
- * @return array|null
+ * @return User|null
  */
 function user_login(int $user_id)
 {
@@ -106,15 +134,15 @@ function user_login(int $user_id)
  */
 function user_logout()
 {
-  setcookie("user_id", NULL);
+  setcookie("user_id", null);
 }
 
 /**
- * @return array|null
+ * @return User|null
  */
 function current_user()
 {
-  $user = NULL;
+  $user = null;
 
   if (isset($_COOKIE["user_id"])) {
     $user_id = (int)$_COOKIE["user_id"];

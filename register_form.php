@@ -1,6 +1,6 @@
 <?php
 require "system/util.php";
-$user = NULL; ?>
+$user = null; ?>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -14,7 +14,7 @@ $user = NULL; ?>
 </head>
 
 <body>
-<?php include("templates/header.php"); ?>
+<?php include "templates/header.php"; ?>
 <section class="section">
   <div class="container">
     <div class="columns">

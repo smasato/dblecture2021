@@ -31,8 +31,9 @@ $user = current_user();
                 <label>
                   <select name="id">
                     <?php $users = get_users(); ?>
-                    <?php foreach ($users as $user) : ?>
-                      <option value="<?php echo($user[0]); ?>"><?php echo $user[1] ?></option>
+                    <?php /** @var User $user */
+                    foreach ($users as $user) : ?>
+                      <option value="<?php echo($user->id); ?>"><?php echo $user->name ?></option>
                     <?php endforeach;
                     unset($user); ?>
                   </select>

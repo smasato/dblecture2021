@@ -31,7 +31,8 @@ $user = current_user();
       foreach ($scores as $score):?>
         <tr>
           <td>
-            <a href="http://turkey.slis.tsukuba.ac.jp/~s1711452/score.php?isbn=<?php echo $score[0] ?>"><?php echo $score[1] ?></a>
+            <?php /** @var Score $score */ ?>
+            <a href="http://turkey.slis.tsukuba.ac.jp/~s1711452/score.php?isbn=<?php echo $score->isbn ?>"><?php echo $score->name ?></a>
           </td>
         </tr>
       <?php endforeach;
