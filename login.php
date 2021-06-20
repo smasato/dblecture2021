@@ -10,6 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+  <meta http-equiv="refresh" content="1;URL=http://turkey.slis.tsukuba.ac.jp/~s1711452/index.php">
   <title><?php title("ログイン 結果") ?></title>
 </head>
 
@@ -22,6 +23,7 @@
       <div class="column is-one-third">
         <h1 class="title">ログイン</h1>
         <p>ログインしました。</p>
+        <p>1秒後にトップページにリダイレクトします。</p>
       </div>
     </div>
   </div>
