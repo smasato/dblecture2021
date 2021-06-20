@@ -1,7 +1,7 @@
 <?php
-require_once "system/db.php";
-require_once "system/application_user.php";
-require_once "system/music.php";
+require_once dirname(__FILE__) . "/db.php";
+require_once dirname(__FILE__) . "/application_user.php";
+require_once dirname(__FILE__) . "/music.php";
 
 $difficulty_choices = [
   '0' => '未入力',

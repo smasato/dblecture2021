@@ -1,5 +1,5 @@
 <?php
-require_once "system/db.php";
+require_once dirname(__FILE__) . "/db.php";
 
 class User
 {
