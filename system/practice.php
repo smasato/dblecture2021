@@ -33,16 +33,29 @@ class Practice
   }
 }
 
+$difficulty_choices = [
+  '0' => '未入力',
+  '1' => '簡単',
+  '2' => '普通',
+  '3' => '難しい',
+];
+
+$state_choices = [
+  '0' => '未入力',
+  '1' => '練習中',
+  '2' => '弾ける',
+];
+
 /**
- * @param int $user_id
+ * @param User $user
  * @return array
  */
-function get_practices_by_user_id(int $user_id): array
+function get_practices_by_user(User $user): array
 {
   $mysqli = db_setup();
   $stmt = $mysqli->prepare(
     "select * from practice where practice.user_id=?");
-  $stmt->bind_param("i", $user_id);
+  $stmt->bind_param("i", $user->id);
   $stmt->execute();
 
   $rows = $stmt->get_result()->fetch_all();
@@ -53,4 +66,103 @@ function get_practices_by_user_id(int $user_id): array
   }
 
   return $practices;
+}
+
+/**
+ * @param User $user
+ * @param int $music_id
+ * @return Practice|null
+ */
+function get_practice(User $user, int $music_id)
+{
+  $mysqli = db_setup();
+
+  $stmt = $mysqli->prepare("select * from practice 
+                        where practice.user_id=? and practice.music_id=?");
+  $stmt->bind_param("ii", $user->id, $music_id);
+  $stmt->execute();
+
+  $row = $stmt->get_result()->fetch_all()[0];
+
+  if (is_null($row)) {
+    return null;
+  }
+
+  return new Practice(...$row);
+}
+
+/**
+ * 練習を更新する
+ * @param User $current_user
+ * @param Practice $practice
+ * @return bool
+ */
+function update_practice(User $current_user, Practice $practice): bool
+{
+  if ($practice->user()->id != $current_user->id) {
+    return false;
+  }
+
+  $mysqli = db_setup();
+  $stmt = $mysqli->prepare("update practice set difficulty=?, state=?,
+                    start_date=?, end_date=?
+                    where user_id=? and music_id=?");
+  $stmt->bind_param("ssssii", $practice->difficulty, $practice->state,
+    $practice->start_date, $practice->end_date, $practice->user()->id, $practice->music()->id
+  );
+  $stmt->execute();
+
+  if ($mysqli->error != '') {
+    return false;
+  }
+
+  return true;
+}
+
+/**
+ * 練習を作成する
+ * @param User $current_user
+ * @param Practice $practice
+ * @return bool
+ */
+function create_practice(User $current_user, Practice $practice): bool
+{
+  $mysqli = db_setup();
+
+  $stmt = $mysqli->prepare("insert into practice values(?,?,?,?,?,?)");
+  $stmt->bind_param("iissss", $practice->user()->id,
+    $practice->music()->id, $practice->difficulty, $practice->state,
+    $practice->start_date, $practice->end_date
+  );
+  $stmt->execute();
+
+  if ($mysqli->error != '') {
+    return false;
+  }
+
+  return true;
+}
+
+/**
+ * 練習を削除する
+ * @param User $current_user
+ * @param Practice $practice
+ * @return bool
+ */
+function delete_practice(User $current_user, Practice $practice): bool
+{
+  if ($practice->user()->id != $current_user->id) {
+    return false;
+  }
+
+  $mysqli = db_setup();
+  $stmt = $mysqli->prepare("delete from practice where user_id=? and music_id=?");
+  $stmt->bind_param("ii", $practice->user()->id, $practice->music()->id);
+  $stmt->execute();
+
+  if ($mysqli->error != '') {
+    return false;
+  }
+
+  return true;
 }
