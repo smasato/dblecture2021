@@ -27,7 +27,6 @@ $res = create_practice($user, new Practice($user->id, $music_id, $difficulty, $s
 
 <body>
 <?php include "templates/header.php"; ?>
-<?php ?>
 <section class="section">
   <div class="container">
     <div class="columns">
