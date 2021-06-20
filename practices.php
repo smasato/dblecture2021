@@ -21,7 +21,7 @@ $user = current_user();
 <section class="section">
   <div class="container">
     <div class="columns">
-      <div class="column is-one-third">
+      <div class="column">
         <h1 class="title">練習</h1>
         <h2 class="subtitle">練習の一覧です。</h2>
         <table class="table is-striped is-fullwidth">
@@ -41,8 +41,8 @@ $user = current_user();
               <?php /** @var Practice $practice */ ?>
               <td><?php echo $practice->music()->score()->name ?></td>
               <td><?php echo $practice->music()->name ?></td>
-              <td><?php echo $practice->difficulty ?></td>
-              <td><?php echo $practice->state ?></td>
+              <td><?php echo $practice->difficulty_value() ?></td>
+              <td><?php echo $practice->state_value() ?></td>
               <td><?php echo $practice->start_date ?></td>
               <td><?php echo $practice->end_date ?></td>
               <td>

@@ -34,10 +34,11 @@ $res = update_practice($user, $practice);
       <div class="column is-one-third">
         <h1 class="title">練習記録更新 結果</h1>
         <?php if ($res): ?>
-          <p>成功しました</p>
+          <p>練習の更新に成功しました</p>
         <?php else: ?>
-          <p>失敗しました</p>
+          <p>練習の更新失敗しました</p>
         <?php endif; ?>
+        <a href="http://turkey.slis.tsukuba.ac.jp/~s1711452/practices.php">練習一覧</a>
       </div>
     </div>
   </div>

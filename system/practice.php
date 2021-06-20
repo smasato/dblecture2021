@@ -3,6 +3,19 @@ require_once "system/db.php";
 require_once "system/application_user.php";
 require_once "system/music.php";
 
+$difficulty_choices = [
+  '0' => '未入力',
+  '1' => '簡単',
+  '2' => '普通',
+  '3' => '難しい',
+];
+
+$state_choices = [
+  '0' => '未入力',
+  '1' => '練習中',
+  '2' => '弾ける',
+];
+
 class Practice
 {
   private $user_id;
@@ -31,20 +44,30 @@ class Practice
   {
     return get_music_by_id($this->music_id);
   }
+
+  public function difficulty_value()
+  {
+    $difficulty_choices = [
+      '0' => '未入力',
+      '1' => '簡単',
+      '2' => '普通',
+      '3' => '難しい',
+    ];
+
+    return $difficulty_choices[$this->difficulty];
+  }
+
+  public function state_value()
+  {
+    $state_choices = [
+      '0' => '未入力',
+      '1' => '練習中',
+      '2' => '弾ける',
+    ];
+
+    return $state_choices[$this->state];
+  }
 }
-
-$difficulty_choices = [
-  '0' => '未入力',
-  '1' => '簡単',
-  '2' => '普通',
-  '3' => '難しい',
-];
-
-$state_choices = [
-  '0' => '未入力',
-  '1' => '練習中',
-  '2' => '弾ける',
-];
 
 /**
  * @param User $user
