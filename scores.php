@@ -34,7 +34,8 @@ $user = current_user();
             <a href="http://turkey.slis.tsukuba.ac.jp/~s1711452/score.php?isbn=<?php echo $score[0] ?>"><?php echo $score[1] ?></a>
           </td>
         </tr>
-      <?php endforeach; ?>
+      <?php endforeach;
+      unset($score); ?>
     </table>
   </div>
 </section>

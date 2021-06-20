@@ -16,7 +16,7 @@ $user = current_user();
 </head>
 
 <body>
-<?php include("templates/header.php"); ?>
+<?php include "templates/header.php"; ?>
 <section class="section">
   <div class="container">
     <div class="columns">
@@ -33,7 +33,8 @@ $user = current_user();
                     <?php $users = get_users(); ?>
                     <?php foreach ($users as $user) : ?>
                       <option value="<?php echo($user[0]); ?>"><?php echo $user[1] ?></option>
-                    <?php endforeach; ?>
+                    <?php endforeach;
+                    unset($user); ?>
                   </select>
                 </label>
               </div>
