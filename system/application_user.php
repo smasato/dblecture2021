@@ -1,5 +1,5 @@
 <?php
-require "system/db.php";
+require_once "system/db.php";
 
 /**
  * ユーザーが存在するか

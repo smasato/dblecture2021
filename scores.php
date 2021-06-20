@@ -1,6 +1,7 @@
 <?php
 require "system/util.php";
 require "system/application_user.php";
+require "system/score.php";
 $user = current_user();
 ?>
 
@@ -16,7 +17,7 @@ $user = current_user();
 </head>
 
 <body>
-<?php include("templates/header.php"); ?>
+<?php include "templates/header.php"; ?>
 <section class="section">
   <div class="container">
     <h1 class="title">楽譜一覧</h1>
@@ -26,26 +27,18 @@ $user = current_user();
         <td>楽譜名</td>
       </tr>
       <?php
-      # TODO: 関数化する
-      $table_name = "score";
-      $host = "localhost";
-      if (!$conn = mysqli_connect($host, "s1711452", "hogehoge")) {
-        die("MySQL接続エラー.<br />");
-      }
-      mysqli_select_db($conn, "s1711452");
-      $sql = "SELECT * FROM ${table_name}";
-      $res = mysqli_query($conn, $sql);
-      while ($row = mysqli_fetch_array($res)) {
-        print("<tr>");
-        print("<td><a href=\"http://turkey.slis.tsukuba.ac.jp/~s1711452/score.php?isbn=" . $row["isbn"] . "\">" . $row["name"] . "</a></td>");
-        print("</tr>\n");
-      }
-      mysqli_free_result($res);
-      ?>
+      $scores = get_scores();
+      foreach ($scores as $score):?>
+        <tr>
+          <td>
+            <a href="http://turkey.slis.tsukuba.ac.jp/~s1711452/score.php?isbn=<?php echo $score[0] ?>"><?php echo $score[1] ?></a>
+          </td>
+        </tr>
+      <?php endforeach; ?>
     </table>
   </div>
 </section>
-<?php include("templates/footer.php"); ?>
+<?php include "templates/footer.php"; ?>
 </body>
 
 </html>
