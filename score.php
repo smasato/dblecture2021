@@ -1,27 +1,11 @@
 <?php
-require("system/util.php");
-require("system/application_user.php");
+require "system/util.php";
+require "system/application_user.php";
+require "system/music.php";
 $user = current_user();
 
-# TODO: 関数化する
-$host = "localhost";
-if (!$conn = mysqli_connect($host, "s1711452", "hogehoge")) {
-  die("データベース接続エラー.<br />");
-}
-mysqli_select_db($conn, "s1711452");
-mysqli_set_charset($conn, "utf8");
-
-if (isset($_GET['isbn']) && $_GET['isbn'] != "") {
-  $isbn = mysqli_escape_string($conn, $_GET["isbn"]);
-  $isbn = str_replace("%", "\%", $isbn);
-
-  $sql = "SELECT score.name, music.id, music.name FROM score, music where music.isbn=" . $isbn . " AND score.isbn=" . $isbn;
-  $res = mysqli_query($conn, $sql);
-  $rows = mysqli_fetch_all($res);
-  mysqli_free_result($res);
-
-  $score_name = $rows[0][0];
-}
+$musics = get_musics_by_score_id($_GET['isbn']);
+$score_name = $musics[0][0];
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -35,28 +19,26 @@ if (isset($_GET['isbn']) && $_GET['isbn'] != "") {
 </head>
 
 <body>
-  <?php include("templates/header.php"); ?>
-  <section class="section">
-    <div class="container">
-      <h1 class="title"><?php echo ($score_name); ?> 曲一覧</h1>
-      <h2 class="subtitle"><?php echo ($score_name); ?> に登録されている曲の一覧です。</h2>
-      <table class="table is-striped is-fullwidth">
+<?php include "templates/header.php"; ?>
+<section class="section">
+  <div class="container">
+    <h1 class="title"><?php echo($score_name); ?> 曲一覧</h1>
+    <h2 class="subtitle"><?php echo($score_name); ?> に登録されている曲の一覧です。</h2>
+    <table class="table is-striped is-fullwidth">
+      <tr>
+        <td>曲名</td>
+      </tr>
+      <?php
+      foreach ($musics as $music): ?>
         <tr>
-          <td>id</td>
-          <td>曲名</td>
+          <td><?php echo $music[2] ?></td>
         </tr>
-        <?php
-        foreach ($rows as $row) {
-          print("<tr>");
-          print("<td>" . $row[1] . "</td>");
-          print("<td>" . $row[2] . "</td>");
-          print("</tr>");
-        }
-        unset($row); ?>
-      </table>
-    </div>
-  </section>
-  <?php include("templates/footer.php"); ?>
+      <?php endforeach;
+      unset($music); ?>
+    </table>
+  </div>
+</section>
+<?php include "templates/footer.php"; ?>
 </body>
 
 </html>
